@@ -1,0 +1,10 @@
+/.gradle/
+/.idea/
+/build/
+/gradle/
+/lib/
+/out/
+/src/main/resources/view/build/
+/src/main/resources/view/node_modules/
+/src/main/resources/view/package-lock.json
+morcheka_task.iml
