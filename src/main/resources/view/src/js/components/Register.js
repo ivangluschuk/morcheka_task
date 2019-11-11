@@ -18,9 +18,6 @@ class Register extends React.Component {
     this.onFieldChange - this.onFieldChange.bind(this);
     this.componentDidMount - this.componentDidMount.bind(this);
     this.handleRegister - this.handleRegister.bind(this);
-
-    this.login = React.createRef();
-    this.password = React.createRef();
   }
 
   onFieldChange(fieldName, event) {
@@ -32,12 +29,12 @@ class Register extends React.Component {
   }
 
   componentDidMount() {
-    this.login.current.focus();
+    this.refs.login.focus();
   }
 
   async handleRegister() {
-    const login = this.login.current.value;
-    const password = this.password.current.value;
+    const login = this.refs.login.value;
+    const password = this.refs.password.value;
 
     const registrationRequest = {
       username: login,
@@ -51,8 +48,8 @@ class Register extends React.Component {
       this.props.onRegister();
     }
 
-    this.login.current.value = "";
-    this.password.current.value = "";
+    this.refs.login.value = "";
+    this.refs.password.value = "";
 
     this.setState({
       loginIsEmpty: true,
@@ -78,7 +75,7 @@ class Register extends React.Component {
               placeholder="login"
               onChange={this.onFieldChange.bind(this, "loginIsEmpty")}
               defaultValue=""
-              ref={this.login} />
+              ref="login"/>
             <input 
               className="password" 
               type="password" 
@@ -86,7 +83,7 @@ class Register extends React.Component {
               placeholder="password"
               defaultValue=""
               onChange={this.onFieldChange.bind(this, "passwordIsEmpty")}
-              ref={this.password} />
+              ref="password"/>
             <button 
               className={"button button_up " + (buttonMode ? "button_disable" : "button_enable")} 
               type="button"

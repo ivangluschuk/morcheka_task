@@ -94,7 +94,7 @@ class Table extends React.Component {
     this.refs[`${note.id}:address`].disabled = !this.refs[`${note.id}:address`].disabled;
     this.refs[`${note.id}:phone`].disabled = !this.refs[`${note.id}:phone`].disabled;
 
-    if (this.refs[`${note.id}:edit`].buttonMode === 0) {
+    if (parseInt(this.refs[`${note.id}:edit`].buttonMode) === 0) {
       this.refs[`${note.id}:edit`].className = "button button_enable button_table";
       this.refs[`${note.id}:edit`].buttonMode = "1";
       this.refs[`${note.id}:edit`].innerHTML = "edit";
