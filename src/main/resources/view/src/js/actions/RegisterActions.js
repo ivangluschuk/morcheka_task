@@ -1,0 +1,58 @@
+'use strict';
+
+import { auth } from "../util/server.api.auth.js";
+
+export function onRegisterFormFieldChange(fieldName, event) {
+    if (event.target.value.trim().length > 0) {
+        return {
+            type: 'CHANGE_FIELD_REGISTER_FORM',
+            payload: {
+                ["" + fieldName]: false,
+            },
+        }
+    } else {
+        return {
+            type: 'CHANGE_FIELD_REGISTER_FORM',
+            payload: {
+                ["" + fieldName]: true,
+            },
+        }
+    }
+}
+
+export function handleRegister(loginRef, passwordRef) {
+    return async dispatch => {
+        const login = this.refs[loginRef].value;
+        const password = this.refs[passwordRef].value;
+
+        const registrationRequest = {
+            username: login,
+            password: password,
+        };
+
+        const response = await auth.register(registrationRequest);
+
+        this.refs[loginRef].value = "";
+        this.refs[passwordRef].value = "";
+
+        if (response.status === 400) { 
+            dispatch({
+                type: 'HANDLE_REGISTER',
+                payload: {
+                    loginIsEmpty: true,
+                    passwordIsEmpty: true,
+                }
+            })
+        } else {
+            window.location.replace('/');
+        }
+
+        dispatch({
+            type: 'HANDLE_REGISTER',
+            payload: {
+                loginIsEmpty: true,
+                passwordIsEmpty: true,
+            }
+        });
+    }
+}

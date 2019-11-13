@@ -19,18 +19,18 @@ export const api = {
             .then(json => json);
     },
 
-    getAllNotes() {
-        return this.request({
+    async getAllNotes() {
+        return await this.request({
             url: `${SERVER_API_URL}/all`,
         });
     },
     
-    deleteNoteById(id) {
-        return fetch(`${SERVER_API_URL}/delete?id=${id}`);
+    async deleteNoteById(id) {
+        await fetch(`${SERVER_API_URL}/delete?id=${id}`);
     },
 
-    saveNote(note) {
-        return fetch(`${SERVER_API_URL}/save`, {
+    async saveNote(note) {
+        await fetch(`${SERVER_API_URL}/save`, {
             headers: {
                 'Content-type': 'application/json',
             },

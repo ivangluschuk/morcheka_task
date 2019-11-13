@@ -6,8 +6,8 @@ const SERVER_API_URL = SERVER_ADDRESS;
 
 export const auth = {
 
-    login(authenticationRequest) {
-        return fetch(`${SERVER_API_URL}/login`, {
+    async login(authenticationRequest) {
+        return await fetch(`${SERVER_API_URL}/login`, {
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
             },
@@ -16,8 +16,8 @@ export const auth = {
         });
     },
 
-    register(registrationRequest) {
-        return fetch(`${SERVER_API_URL}/register`, {
+    async register(registrationRequest) {
+        return await fetch(`${SERVER_API_URL}/register`, {
             headers: {
                 'Content-type': 'application/json',
             },
@@ -26,8 +26,8 @@ export const auth = {
         });
     },
 
-    logout() {
-        fetch(`${SERVER_API_URL}/logout`);
+    async logout() {
+        await fetch(`${SERVER_API_URL}/logout`);
         location.replace('/login');
     }
 };
