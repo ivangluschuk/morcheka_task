@@ -1,15 +1,24 @@
 'use strict';
 
+import { CHANGE_FIELD_TABLE } from "../reducers/tableReducer";
+import { LOAD_NOTES } from "../reducers/crudReducer";
+
 import { api } from "../util/server.api.common.js";
 
-export function handleOnEdit(note) {
+export const tableActions = {
+    editNote: editNote,
+    onFieldChange: onFieldChange,
+    deleteNote: deleteNote,
+};
+
+function editNote(note) {
     const callback = async function(dispatch) {
         this.refs[`${note.id}:firstName`].disabled = !this.refs[`${note.id}:firstName`].disabled;
         this.refs[`${note.id}:lastName`].disabled = !this.refs[`${note.id}:lastName`].disabled;
         this.refs[`${note.id}:address`].disabled = !this.refs[`${note.id}:address`].disabled;
         this.refs[`${note.id}:phone`].disabled = !this.refs[`${note.id}:phone`].disabled;
 
-        let notes;
+        let notes = [];
 
         if (parseInt(this.refs[`${note.id}:edit`].buttonMode) === 0) {
             this.refs[`${note.id}:edit`].className = "button button_enable button_table";
@@ -22,11 +31,11 @@ export function handleOnEdit(note) {
             const phone = this.refs[`${note.id}:phone`].value;
 
             const newNote = {
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            phone: phone,
-            id: note.id
+                firstName: firstName,
+                lastName: lastName,
+                address: address,
+                phone: phone,
+                id: note.id
             };
 
             await api.saveNote(newNote);
@@ -38,7 +47,7 @@ export function handleOnEdit(note) {
         }
 
         dispatch({
-            type: 'LOAD_NOTES',
+            type: LOAD_NOTES,
             payload: notes,
         });
     };
@@ -46,7 +55,7 @@ export function handleOnEdit(note) {
     return callback.bind(this);
 }
 
-export function onFieldChange(note) {
+function onFieldChange(note) {
     const firstName = this.refs[`${note.id}:firstName`].value.length > 0;
     const lastName = this.refs[`${note.id}:lastName`].value.length > 0;
     const address = this.refs[`${note.id}:address`].value.length > 0;
@@ -63,6 +72,19 @@ export function onFieldChange(note) {
     }
 
     return {
-        type: 'CHANGE_FIELD_TABLE',
+        type: CHANGE_FIELD_TABLE,
     }
+}
+
+function deleteNote(note) {
+    const callback = async function(dispatch) {
+        await api.deleteNoteById(note.id);
+        this.props.loadNotes();
+
+        return dispatch({
+            type: LOAD_NOTES,
+        });
+    };
+
+    return callback.bind(this);
 }

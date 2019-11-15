@@ -8,9 +8,12 @@ class Register extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.toCrudPage(this.props.state.mode);
+  }
+
   componentDidMount() {
     this.refs.login.focus();
-    this.props.toCrudPage(this.props.state.mode);
   }
 
   render() {
@@ -43,7 +46,7 @@ class Register extends React.Component {
             <button 
               className={"button button_up " + (buttonMode ? "button_disable" : "button_enable")} 
               type="button"
-              onClick={this.props.onRegister.bind(this, "login", "password")}
+              onClick={this.props.register.bind(this, "login", "password")}
               disabled={buttonMode}>
               Register  
             </button>

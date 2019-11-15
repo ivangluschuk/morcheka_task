@@ -1,18 +1,26 @@
 'use strict';
 
+import { CHANGE_FIELD_REGISTER_FORM } from "../reducers/registerReducer";
+import { HANDLE_REGISTER } from "../reducers/registerReducer";
+
 import { auth } from "../util/server.api.auth.js";
 
-export function onRegisterFormFieldChange(fieldName, event) {
+export const registerActions = {
+    onFieldChange: onFieldChange,
+    register: register,
+};
+
+function onFieldChange(fieldName, event) {
     if (event.target.value.trim().length > 0) {
         return {
-            type: 'CHANGE_FIELD_REGISTER_FORM',
+            type: CHANGE_FIELD_REGISTER_FORM,
             payload: {
                 ["" + fieldName]: false,
             },
         }
     } else {
         return {
-            type: 'CHANGE_FIELD_REGISTER_FORM',
+            type: CHANGE_FIELD_REGISTER_FORM,
             payload: {
                 ["" + fieldName]: true,
             },
@@ -20,7 +28,7 @@ export function onRegisterFormFieldChange(fieldName, event) {
     }
 }
 
-export function handleRegister(loginRef, passwordRef) {
+function register(loginRef, passwordRef) {
     return async dispatch => {
         const login = this.refs[loginRef].value;
         const password = this.refs[passwordRef].value;
@@ -37,7 +45,7 @@ export function handleRegister(loginRef, passwordRef) {
 
         if (response.status === 400) { 
             dispatch({
-                type: 'HANDLE_REGISTER',
+                type: HANDLE_REGISTER,
                 payload: {
                     loginIsEmpty: true,
                     passwordIsEmpty: true,
@@ -48,7 +56,7 @@ export function handleRegister(loginRef, passwordRef) {
         }
 
         dispatch({
-            type: 'HANDLE_REGISTER',
+            type: HANDLE_REGISTER,
             payload: {
                 loginIsEmpty: true,
                 passwordIsEmpty: true,

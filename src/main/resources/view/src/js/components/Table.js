@@ -53,7 +53,7 @@ class Table extends React.Component {
                 type="button"
                 buttonMode="0"
                 className={"button button_enable button_table"}
-                onClick={this.props.handleOnEdit.bind(this, note)}
+                onClick={this.props.editNote.bind(this, note)}
                 ref={`${note.id}:edit`}>
                 edit
               </button>
@@ -61,7 +61,7 @@ class Table extends React.Component {
             <td className="table__cell table__cell_button">
               <button type="button" 
                 className="button button_enable button_table" 
-                onClick={this.props.handleDeleteNote.bind(this, note)} >
+                onClick={this.props.deleteNote.bind(this, note)} >
                 delete
               </button>
             </td>

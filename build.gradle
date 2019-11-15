@@ -7,8 +7,6 @@ buildscript {
     }
 }
 
-
-
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
@@ -18,7 +16,7 @@ apply plugin: 'io.spring.dependency-management'
 mainClassName = 'morcheka_task.Application'
 
 bootJar {
-    baseName = 'c2'
+    baseName = 'morcheka_task'
     version =  '0.1.0'
 }
 

@@ -1,18 +1,26 @@
 'use strict';
 
+import { CHANGE_FIELD_LOGIN_FORM } from "../reducers/loginReducer";
+import { HANDLE_LOGIN } from "../reducers/loginReducer";
+
 import { auth } from "../util/server.api.auth.js";
 
-export function onLoginFormFieldChange(fieldName, event) {
+export const loginActions = { 
+    onFieldChange: onFieldChange,
+    login: login,
+};
+
+function onFieldChange(fieldName, event) {
     if (event.target.value.trim().length > 0) {
         return {
-            type: 'CHANGE_FIELD_LOGIN_FORM',
+            type: CHANGE_FIELD_LOGIN_FORM,
             payload: {
                 ["" + fieldName]: false,
             },
         }
     } else {
         return {
-            type: 'CHANGE_FIELD_LOGIN_FORM',
+            type: CHANGE_FIELD_LOGIN_FORM,
             payload: {
                 ["" + fieldName]: true,
             },
@@ -20,7 +28,7 @@ export function onLoginFormFieldChange(fieldName, event) {
     }
 }
 
-export function handleLoginFormLogin(login, password) {
+function login(login, password) {
     return async dispatch => {
         const authenticationRequest = `username=${this.refs[login].value}&password=${this.refs[password].value}`;
 
@@ -35,7 +43,7 @@ export function handleLoginFormLogin(login, password) {
         }
 
         dispatch({
-            type: 'HANDLE_LOGIN',
+            type: HANDLE_LOGIN,
             payload: {
                 loginIsEmpty: true,
                 passwordIsEmpty: true,

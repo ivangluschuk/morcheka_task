@@ -1,9 +1,19 @@
 'use strict';
 
+import { HANDLE_ADD_NOTE_NOTE_ADDER_FORM } from "../reducers/noteAdderReducer";
+import { CHANGE_FIELD_NOTE_ADDER_FORM } from "../reducers/noteAdderReducer";
+import { HANDLE_LOGOUT } from "../reducers/noteAdderReducer";
+
 import { api } from "../util/server.api.common.js";
 import { auth } from "../util/server.api.auth.js";
 
-export function handleAddNoteAdderForm(firstNameRef, lastNameRef, addressRef, phoneRef) {
+export const noteAdderActions = {
+    addNote: addNote,
+    logout: logout,
+    onFieldChange: onFieldChange,
+};
+
+function addNote(firstNameRef, lastNameRef, addressRef, phoneRef) {
     const callback = async function(dispatch) {
         const firstName = this.props.state.firstName[0];
         const lastName = this.props.state.lastName[0];
@@ -26,7 +36,7 @@ export function handleAddNoteAdderForm(firstNameRef, lastNameRef, addressRef, ph
         this.props.loadNotes();
 
         return dispatch({
-            type: 'HANDLE_ADD_NOTE',
+            type: HANDLE_ADD_NOTE_NOTE_ADDER_FORM,
             payload: {
                 firstName: ["", true],
                 lastName: ["", true],
@@ -39,26 +49,26 @@ export function handleAddNoteAdderForm(firstNameRef, lastNameRef, addressRef, ph
     return callback.bind(this);
 }
 
-export function handleLogout() {
+function logout() {
     const callback = async function(dispatch) {
         await auth.logout();
 
         return dispatch({
-            type: 'HANDLE_LOGOUT',
+            type: HANDLE_LOGOUT,
         });
     };
 
     return callback.bind(this);
 }
 
-export function onFieldChangeNoteAdderForm(fieldName, event) {
-    const note = [event.target.value.trim()];
+function onFieldChange(fieldName) {
+    const note = [this.refs[fieldName].value.trim()];
 
-    if (event.target.value.trim().length > 0) {
+    if (this.refs[fieldName].value.trim().length > 0) {
         note[1] = false;
 
         return {
-            type: 'CHANGE_FIELD_NOTE_ADDER_FORM',
+            type: CHANGE_FIELD_NOTE_ADDER_FORM,
             payload: {
                 ["" + fieldName]: note,
             },
@@ -67,7 +77,7 @@ export function onFieldChangeNoteAdderForm(fieldName, event) {
         note[1] = true;
 
         return {
-            type: 'CHANGE_FIELD_NOTE_ADDER_FORM',
+            type: CHANGE_FIELD_NOTE_ADDER_FORM,
             payload: {
                 ["" + fieldName]: note,
             },

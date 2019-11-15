@@ -55,7 +55,7 @@ class NoteAdder extends React.Component {
               <button
                 type="button"
                 className={"button button_table-add " + ( buttonMode ? "button_disable" : "button_enable button_enable_table-add")} 
-                onClick={this.props.handleAddNote.bind(this, "firstName", "lastName", "address", "phone")}
+                onClick={this.props.addNote.bind(this, "firstName", "lastName", "address", "phone")}
                 disabled={buttonMode}>
                 add
               </button>
@@ -64,7 +64,7 @@ class NoteAdder extends React.Component {
               <button
                 type="button"
                 className={"button button_table-add button_enable"} 
-                onClick={this.props.handleLogout.bind(this)}>
+                onClick={this.props.logout.bind(this)}>
                 logout
               </button>
             </td>

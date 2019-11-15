@@ -1,5 +1,7 @@
 'use strict';
 
+export const CHANGE_FIELD_TABLE = 'CHANGE_FIELD_TABLE';
+
 const initialState = {
     editDisable: true,
     buttonMode: 0,
@@ -11,7 +13,7 @@ const initialState = {
 
 export function tableReducer(state = initialState, action) {
     switch(action.type) {
-        case 'HANDLE_ADD_NOTE':
+        case CHANGE_FIELD_TABLE:
             return Object.assign({}, state, action.payload);
         
         default:

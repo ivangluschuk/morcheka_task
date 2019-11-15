@@ -8,9 +8,12 @@ class Login extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.toCrudPage(this.props.mode);
+  }
+
   componentDidMount() {
     this.refs.login.focus();
-    this.props.toCrudPage(this.props.mode);
   }
 
   render() {
@@ -41,7 +44,7 @@ class Login extends React.Component {
             <button 
               className={"button button_up " + (buttonMode ? "button_disable" : "button_enable")} 
               type="button" 
-              onClick={this.props.onLogin.bind(this, "login", "password")}
+              onClick={this.props.login.bind(this, "login", "password")}
               disabled={buttonMode}>
               Log in
             </button>
