@@ -1,6 +1,7 @@
 'use strict';
 
 import React from "react";
+import PropTypes from 'prop-types'; 
 import Login from "../components/Login.js";
 import Register from "../components/Register.js";
 import Crud from "../components/Crud.js";
@@ -71,3 +72,40 @@ export default connect(
   mapStateToProps, 
   mapDispatchToProps
 )(App);
+
+App.propTypes = {
+  login: PropTypes.shape({
+    loginIsEmpty: PropTypes.bool.isRequired,
+    passwordIsEmpty: PropTypes.bool.isRequired,
+    infoMassageText: PropTypes.string.isRequired,
+  }).isRequired,
+
+  register: PropTypes.shape({
+    loginIsEmpty: PropTypes.bool.isRequired,
+    passwordIsEmpty: PropTypes.bool.isRequired,
+    buttonMode: PropTypes.bool.isRequired,
+    infoMassageText: PropTypes.string.isRequired,
+  }).isRequired,
+
+  app: PropTypes.shape({
+    inputRegisterLoginValue: PropTypes.bool.isRequired,
+    inputPasswordLoginValue: PropTypes.bool.isRequired,
+    mode: PropTypes.number.isRequired,
+  }).isRequired,
+
+  appActions: PropTypes.shape({
+    toLoginPage: PropTypes.func.isRequired,
+    toRegisterPage: PropTypes.func.isRequired,
+    toCrudPage: PropTypes.func.isRequired,
+  }).isRequired,
+
+  registerActions: PropTypes.shape({
+    register: PropTypes.func.isRequired,
+    onFieldChange: PropTypes.func.isRequired,
+  }).isRequired,
+
+  loginActions: PropTypes.shape({
+    onFieldChange: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+  }).isRequired,
+};

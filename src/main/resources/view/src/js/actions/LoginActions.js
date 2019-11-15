@@ -38,8 +38,17 @@ function login(login, password) {
         this.refs[login].value = "";
         this.refs[password].value = "";
 
-        if (url.indexOf('?') === -1) { 
+        if(url.includes('/crud')) {
             window.location.replace('/');
+        } else if (url.includes('?error')) {
+            dispatch({
+                type: HANDLE_LOGIN,
+                payload: {
+                    loginIsEmpty: true,
+                    passwordIsEmpty: true,
+                    infoMassageText: 'Credentials are bad',
+                }
+            });
         }
 
         dispatch({

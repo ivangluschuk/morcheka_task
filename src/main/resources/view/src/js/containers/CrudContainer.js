@@ -3,6 +3,7 @@
 import React from "react";
 import Table from "../components/Table.js";
 import NoteAdder from "../components/NoteAdder.js";
+import PropTypes from 'prop-types'; 
 import { connect } from 'react-redux';
 import { crudActions } from '../actions/CrudActions.js';
 import { noteAdderActions } from '../actions/NoteAdderActions.js';
@@ -69,3 +70,41 @@ export default connect(
   mapStateToProps, 
   mapDispatchToProps
 )(Crud);
+
+Crud.propTypes = {
+  crud: PropTypes.shape({
+    notes: PropTypes.array.isRequired,
+  }).isRequired,
+
+  noteAdder: PropTypes.shape({
+    firstName: PropTypes.arrayOf(PropTypes.string.isRequired, PropTypes.bool.isRequired).isRequired,
+    lastName: PropTypes.arrayOf(PropTypes.string.isRequired, PropTypes.bool.isRequired).isRequired,
+    address: PropTypes.arrayOf(PropTypes.string.isRequired, PropTypes.bool.isRequired).isRequired,
+    phone: PropTypes.arrayOf(PropTypes.string.isRequired, PropTypes.bool.isRequired).isRequired,
+  }).isRequired,
+
+  table: PropTypes.shape({
+    editDisable: PropTypes.bool.isRequired,
+    buttonMode: PropTypes.number.isRequired,
+    nameIsEmpty: PropTypes.bool.isRequired,
+    lastNameIsEmpty: PropTypes.bool.isRequired,
+    addressIsEmpty: PropTypes.bool.isRequired,
+    phone: PropTypes.bool.isRequired,
+  }).isRequired,
+
+  crudActions: PropTypes.shape({
+    loadNotes: PropTypes.func.isRequired,
+  }).isRequired,
+
+  noteAdderActions: PropTypes.shape({
+    addNote: PropTypes.func.isRequired,
+    onFieldChange: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+  }).isRequired,
+
+  tableActions: PropTypes.shape({
+    deleteNote: PropTypes.func.isRequired,
+    onFieldChange: PropTypes.func.isRequired,
+    editNote: PropTypes.func.isRequired,
+  }).isRequired,
+};

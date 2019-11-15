@@ -49,6 +49,7 @@ function register(loginRef, passwordRef) {
                 payload: {
                     loginIsEmpty: true,
                     passwordIsEmpty: true,
+                    infoMassageText: 'This username is already taken',
                 }
             })
         } else {
