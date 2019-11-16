@@ -60,10 +60,10 @@ const mapDispatchToProps = dispatch => ({
   },
   registerActions: {
     register: function(login, password) { dispatch(registerActions.register.call(this, login, password)) },
-    onFieldChange: function(fieldName, event) { dispatch(registerActions.onFieldChange.call(this, fieldName, event)) },
+    onFieldChange: function(field, event) { dispatch(registerActions.onFieldChange.call(this, field, event)) },
   },
   loginActions: {
-    onFieldChange: function(fieldName, event) { dispatch(loginActions.onFieldChange.call(this, fieldName, event)) },
+    onFieldChange: function(field, event) { dispatch(loginActions.onFieldChange.call(this, field, event)) },
     login: function(login, password) { dispatch(loginActions.login.call(this, login, password)) },
   },
 });
@@ -75,21 +75,38 @@ export default connect(
 
 App.propTypes = {
   login: PropTypes.shape({
-    loginIsEmpty: PropTypes.bool.isRequired,
-    passwordIsEmpty: PropTypes.bool.isRequired,
+
+    login: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      empty: PropTypes.bool.isRequired
+    }).isRequired,
+
+    password: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      empty: PropTypes.bool.isRequired
+    }).isRequired,
+
     infoMassageText: PropTypes.string.isRequired,
+
   }).isRequired,
 
   register: PropTypes.shape({
-    loginIsEmpty: PropTypes.bool.isRequired,
-    passwordIsEmpty: PropTypes.bool.isRequired,
-    buttonMode: PropTypes.bool.isRequired,
+
+    login: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      empty: PropTypes.bool.isRequired
+    }).isRequired,
+
+    password: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      empty: PropTypes.bool.isRequired
+    }).isRequired,
+
     infoMassageText: PropTypes.string.isRequired,
+
   }).isRequired,
 
   app: PropTypes.shape({
-    inputRegisterLoginValue: PropTypes.bool.isRequired,
-    inputPasswordLoginValue: PropTypes.bool.isRequired,
     mode: PropTypes.number.isRequired,
   }).isRequired,
 

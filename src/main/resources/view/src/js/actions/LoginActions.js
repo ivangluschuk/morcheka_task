@@ -10,33 +10,32 @@ export const loginActions = {
     login: login,
 };
 
-function onFieldChange(fieldName, event) {
-    if (event.target.value.trim().length > 0) {
+function onFieldChange(field, value) {
+    if (value.length > 0) {
+        field.empty = false;
+        field.text = value;
+        
         return {
             type: CHANGE_FIELD_LOGIN_FORM,
-            payload: {
-                ["" + fieldName]: false,
-            },
+            payload: field,
         }
     } else {
+        field.empty = true;
+        field.text = value;
+
         return {
             type: CHANGE_FIELD_LOGIN_FORM,
-            payload: {
-                ["" + fieldName]: true,
-            },
+            payload: field,
         }
     }
 }
 
 function login(login, password) {
     return async dispatch => {
-        const authenticationRequest = `username=${this.refs[login].value}&password=${this.refs[password].value}`;
+        const authenticationRequest = `username=${login}&password=${password}`;
 
         const response = await auth.login(authenticationRequest);
         const url = response.url;
-
-        this.refs[login].value = "";
-        this.refs[password].value = "";
 
         if(url.includes('/crud')) {
             window.location.replace('/');
@@ -44,8 +43,16 @@ function login(login, password) {
             dispatch({
                 type: HANDLE_LOGIN,
                 payload: {
-                    loginIsEmpty: true,
-                    passwordIsEmpty: true,
+                    login: {
+                        text: '',
+                        empty: true,
+                    },
+
+                    password: {
+                        text: '',
+                        empty: true,
+                    },
+
                     infoMassageText: 'Credentials are bad',
                 }
             });
@@ -54,8 +61,15 @@ function login(login, password) {
         dispatch({
             type: HANDLE_LOGIN,
             payload: {
-                loginIsEmpty: true,
-                passwordIsEmpty: true,
+                login: {
+                    text: '',
+                    empty: true,
+                },
+
+                password: {
+                    text: '',
+                    empty: true,
+                },
             }
         });
     }

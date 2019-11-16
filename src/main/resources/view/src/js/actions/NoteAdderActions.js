@@ -13,12 +13,12 @@ export const noteAdderActions = {
     onFieldChange: onFieldChange,
 };
 
-function addNote(firstNameRef, lastNameRef, addressRef, phoneRef) {
+function addNote() {
     const callback = async function(dispatch) {
-        const firstName = this.props.state.firstName[0];
-        const lastName = this.props.state.lastName[0];
-        const address = this.props.state.address[0];
-        const phone = this.props.state.phone[0];
+        const firstName = this.props.state.firstName.text;
+        const lastName = this.props.state.lastName.text;
+        const address = this.props.state.address.text;
+        const phone = this.props.state.phone.text;
 
         const note = {
             firstName: firstName,
@@ -27,21 +27,31 @@ function addNote(firstNameRef, lastNameRef, addressRef, phoneRef) {
             phone: phone,
         };
 
-        this.refs[firstNameRef].value = "";
-        this.refs[lastNameRef].value = "";
-        this.refs[addressRef].value = "";
-        this.refs[phoneRef].value = "";
-
         await api.saveNote(note);
         this.props.loadNotes();
 
         return dispatch({
             type: HANDLE_ADD_NOTE_NOTE_ADDER_FORM,
             payload: {
-                firstName: ["", true],
-                lastName: ["", true],
-                address: ["", true],
-                phone: ["", true],
+                firstName: {
+                    text: '', 
+                    empty: true,
+                },
+
+                lastName: {
+                    text: '', 
+                    empty: true,
+                },
+
+                address: {
+                    text: '', 
+                    empty: true,
+                },
+
+                phone: {
+                    text: '', 
+                    empty: true,
+                },
             }
         });
     };
@@ -61,26 +71,22 @@ function logout() {
     return callback.bind(this);
 }
 
-function onFieldChange(fieldName) {
-    const note = [this.refs[fieldName].value.trim()];
-
-    if (this.refs[fieldName].value.trim().length > 0) {
-        note[1] = false;
+function onFieldChange(field, value) {
+    if (value.length > 0) {
+        field.text = value;
+        field.empty = false;
 
         return {
             type: CHANGE_FIELD_NOTE_ADDER_FORM,
-            payload: {
-                ["" + fieldName]: note,
-            },
+            payload: field,
         }
     } else {
-        note[1] = true;
+        field.text = value;
+        field.empty = true;
 
         return {
             type: CHANGE_FIELD_NOTE_ADDER_FORM,
-            payload: {
-                ["" + fieldName]: note,
-            },
+            payload: field,
         }
     }
 }

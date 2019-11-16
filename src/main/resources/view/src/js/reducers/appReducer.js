@@ -5,8 +5,6 @@ export const SET_MODE_LOGIN = 'SET_MODE_LOGIN';
 export const SET_MODE_CRUD = 'SET_MODE_CRUD';
 
 const initialState = {
-    inputRegisterLoginValue: "",
-    inputRegisterPasswordValue: "",
     mode: 0,
 };
 

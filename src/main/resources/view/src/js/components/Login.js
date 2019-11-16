@@ -12,13 +12,9 @@ class Login extends React.Component {
     this.props.toCrudPage(this.props.mode);
   }
 
-  componentDidMount() {
-    this.refs.login.focus();
-  }
-
   render() {
-    const loginIsEmpty = this.props.state.loginIsEmpty;
-    const passwordIsEmpty = this.props.state.passwordIsEmpty;
+    const loginIsEmpty = this.props.state.login.empty;
+    const passwordIsEmpty = this.props.state.password.empty;
     const infoMassageText = this.props.state.infoMassageText;
     const buttonMode = (loginIsEmpty || passwordIsEmpty);
 
@@ -31,20 +27,31 @@ class Login extends React.Component {
               className="login" 
               type="text" 
               placeholder="login"
-              defaultValue=""
-              onChange={this.props.onFieldChange.bind(this, "loginIsEmpty")}
-              ref="login"/>
+              value={this.props.state.login.text}
+              autoFocus
+              onChange={e => {
+                this.props.onFieldChange(
+                  this.props.state.login, 
+                  e.target.value.trim());
+              }}/>
             <input 
               className="password" 
               type="password" 
               placeholder="password"
-              defaultValue=""
-              onChange={this.props.onFieldChange.bind(this, "passwordIsEmpty")}
-              ref="password"/>
+              value={this.props.state.password.text}
+              onChange={e => {
+                this.props.onFieldChange(
+                  this.props.state.password, 
+                  e.target.value.trim());
+              }}/>
             <button 
               className={"button button_up " + (buttonMode ? "button_disable" : "button_enable")} 
               type="button" 
-              onClick={this.props.login.bind(this, "login", "password")}
+              onClick={this.props.login.bind(
+                this, 
+                this.props.state.login.text,
+                this.props.state.password.text,
+              )}
               disabled={buttonMode}>
               Log in
             </button>

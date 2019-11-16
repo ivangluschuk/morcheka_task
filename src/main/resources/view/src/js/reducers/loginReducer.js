@@ -4,8 +4,16 @@ export const CHANGE_FIELD_LOGIN_FORM = 'CHANGE_FIELD_LOGIN_FORM';
 export const HANDLE_LOGIN = 'HANDLE_LOGIN';
 
 const initialState = {
-    loginIsEmpty: true,
-    passwordIsEmpty: true,
+    login:  {
+        text: '',
+        empty: true,
+    },
+    
+    password: {
+        text: '',
+        empty: true,
+    },
+
     infoMassageText: "",
 };
 

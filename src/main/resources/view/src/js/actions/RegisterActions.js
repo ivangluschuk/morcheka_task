@@ -10,28 +10,28 @@ export const registerActions = {
     register: register,
 };
 
-function onFieldChange(fieldName, event) {
-    if (event.target.value.trim().length > 0) {
+function onFieldChange(field, value) {
+    if (value.length > 0) {
+        field.text = value;
+        field.empty = false;
+        
         return {
             type: CHANGE_FIELD_REGISTER_FORM,
-            payload: {
-                ["" + fieldName]: false,
-            },
+            payload: field,
         }
     } else {
+        field.text = value;
+        field.empty = true;
+
         return {
             type: CHANGE_FIELD_REGISTER_FORM,
-            payload: {
-                ["" + fieldName]: true,
-            },
+            payload: field,
         }
     }
 }
 
-function register(loginRef, passwordRef) {
+function register(login, password) {
     return async dispatch => {
-        const login = this.refs[loginRef].value;
-        const password = this.refs[passwordRef].value;
 
         const registrationRequest = {
             username: login,
@@ -40,15 +40,20 @@ function register(loginRef, passwordRef) {
 
         const response = await auth.register(registrationRequest);
 
-        this.refs[loginRef].value = "";
-        this.refs[passwordRef].value = "";
-
         if (response.status === 400) { 
             dispatch({
                 type: HANDLE_REGISTER,
                 payload: {
-                    loginIsEmpty: true,
-                    passwordIsEmpty: true,
+                    login: {
+                        text: '',
+                        empty: true, 
+                    },
+
+                    password: {
+                        text: '',
+                        empty: true, 
+                    },
+
                     infoMassageText: 'This username is already taken',
                 }
             })
@@ -59,8 +64,15 @@ function register(loginRef, passwordRef) {
         dispatch({
             type: HANDLE_REGISTER,
             payload: {
-                loginIsEmpty: true,
-                passwordIsEmpty: true,
+                login: {
+                    text: '',
+                    empty: true, 
+                },
+
+                password: {
+                    text: '',
+                    empty: true, 
+                },
             }
         });
     }

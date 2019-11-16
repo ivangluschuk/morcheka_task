@@ -4,10 +4,17 @@ export const CHANGE_FIELD_REGISTER_FORM = 'CHANGE_FIELD_REGISTER_FORM';
 export const HANDLE_REGISTER = 'HANDLE_REGISTER';
 
 const initialState = {
-    loginIsEmpty: true,
-    passwordIsEmpty: true,
-    buttonMode: false,
-    infoMassageText: "",
+    login:  {
+        text: '',
+        empty: true,
+    },
+    
+    password: {
+        text: '',
+        empty: true,
+    },
+
+    infoMassageText: '',
 };
 
 export function registerReducer(state = initialState, action) {

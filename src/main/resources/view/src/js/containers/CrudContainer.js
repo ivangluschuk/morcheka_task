@@ -54,9 +54,9 @@ const mapDispatchToProps = dispatch => ({
       loadNotes: function() { dispatch(crudActions.loadNotes.call(this)) }, 
     },
     noteAdderActions: {
-      addNote: function(firstNameRef, lastNameRef, addressRef, phoneRef) { 
-        dispatch(noteAdderActions.addNote.call(this, firstNameRef, lastNameRef, addressRef, phoneRef)) },
-      onFieldChange: function(fieldName) { dispatch(noteAdderActions.onFieldChange.call(this, fieldName)) },
+      addNote: function() {
+        dispatch(noteAdderActions.addNote.call(this)) },
+      onFieldChange: function(field, value) { dispatch(noteAdderActions.onFieldChange.call(this, field, value)) },
       logout: () => dispatch(noteAdderActions.logout()), 
     },
     tableActions: {

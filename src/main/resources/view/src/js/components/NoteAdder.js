@@ -9,10 +9,10 @@ class NoteAdder extends React.Component {
   }
 
   render() {
-    const firstNameIsEmpty = this.props.state.firstName[1];
-    const lastNameIsEmpty = this.props.state.lastName[1];
-    const addressIsEmpty = this.props.state.address[1];
-    const phoneIsEmpty = this.props.state.phone[1];
+    const firstNameIsEmpty = this.props.state.firstName.empty;
+    const lastNameIsEmpty = this.props.state.lastName.empty;
+    const addressIsEmpty = this.props.state.address.empty;
+    const phoneIsEmpty = this.props.state.phone.empty;
     const buttonMode = (firstNameIsEmpty || lastNameIsEmpty || addressIsEmpty || phoneIsEmpty);
 
     return (
@@ -24,38 +24,54 @@ class NoteAdder extends React.Component {
                 type="text" 
                 placeholder="Name"
                 className="table__input" 
-                onChange={this.props.onFieldChange.bind(this, "firstName")} 
-                ref="firstName" />
+                value={this.props.state.firstName.text}
+                onChange={e => {
+                  this.props.onFieldChange(
+                    this.props.state.firstName, 
+                    e.target.value.trim());
+                }}/>
             </td>
             <td className="table__cell">
               <input 
                 type="text" 
                 placeholder="Last name" 
                 className="table__input" 
-                onChange={this.props.onFieldChange.bind(this, "lastName")} 
-                ref="lastName"/>
+                value={this.props.state.lastName.text}
+                onChange={e => {
+                  this.props.onFieldChange(
+                    this.props.state.lastName, 
+                    e.target.value.trim());
+                }}/>
             </td> 
             <td className="table__cell">
               <input 
                 type="text" 
                 placeholder="Address" 
                 className="table__input" 
-                onChange={this.props.onFieldChange.bind(this, "address")} 
-                ref="address" />
+                value={this.props.state.address.text}
+                onChange={e => {
+                  this.props.onFieldChange(
+                    this.props.state.address, 
+                    e.target.value.trim());
+                }}/>
             </td>
             <td className="table__cell">
               <input 
                 type="text" 
                 placeholder="Phone" 
                 className="table__input" 
-                onChange={this.props.onFieldChange.bind(this, "phone")} 
-                ref="phone" />
+                value={this.props.state.phone.text}
+                onChange={e => {
+                  this.props.onFieldChange(
+                    this.props.state.phone, 
+                    e.target.value.trim());
+                }}/>
             </td>
             <td className="table__cell table__cell_button">
               <button
                 type="button"
                 className={"button button_table-add " + ( buttonMode ? "button_disable" : "button_enable button_enable_table-add")} 
-                onClick={this.props.addNote.bind(this, "firstName", "lastName", "address", "phone")}
+                onClick={this.props.addNote.bind(this)}
                 disabled={buttonMode}>
                 add
               </button>

@@ -12,13 +12,9 @@ class Register extends React.Component {
     this.props.toCrudPage(this.props.state.mode);
   }
 
-  componentDidMount() {
-    this.refs.login.focus();
-  }
-
   render() {
-    const loginIsEmpty = this.props.state.loginIsEmpty;
-    const passwordIsEmpty = this.props.state.passwordIsEmpty;
+    const loginIsEmpty = this.props.state.login.empty;
+    const passwordIsEmpty = this.props.state.password.empty;
     const infoMassageText = this.props.state.infoMassageText;
     const buttonMode = (loginIsEmpty || passwordIsEmpty);
 
@@ -32,21 +28,32 @@ class Register extends React.Component {
               type="text" 
               name="login" 
               placeholder="login"
-              onChange={this.props.onFieldChange.bind(this, "loginIsEmpty")}
-              defaultValue=""
-              ref="login"/>
+              autoFocus
+              value={this.props.state.login.text}
+              onChange={e => {
+                this.props.onFieldChange(
+                  this.props.state.login, 
+                  e.target.value.trim());
+              }}/>
             <input 
               className="password" 
               type="password" 
               name="password"
               placeholder="password"
-              defaultValue=""
-              onChange={this.props.onFieldChange.bind(this, "passwordIsEmpty")}
-              ref="password"/>
+              value={this.props.state.password.text}
+              onChange={e => {
+                this.props.onFieldChange(
+                  this.props.state.password, 
+                  e.target.value.trim());
+              }}/>
             <button 
               className={"button button_up " + (buttonMode ? "button_disable" : "button_enable")} 
               type="button"
-              onClick={this.props.register.bind(this, "login", "password")}
+              onClick={this.props.register.bind(
+                this, 
+                this.props.state.login.text,
+                this.props.state.password.text,
+              )}
               disabled={buttonMode}>
               Register  
             </button>
