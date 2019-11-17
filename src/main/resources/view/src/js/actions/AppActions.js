@@ -74,5 +74,5 @@ function toCrudPage(mode) {
 function ifToCrudPage() {
 	const href = document.location.href.split('/');
 
-	return href[href.length - 1] === 'crud';
+	return href[href.length - 1] === 'notes';
 }

@@ -2,7 +2,7 @@
 
 import SERVER_ADDRESS from '../config/server.config.js';
 
-const SERVER_API_URL = SERVER_ADDRESS + '/api';
+const SERVER_API_URL = SERVER_ADDRESS + '/api/notes';
 
 export const api = {
 	async request(options) {

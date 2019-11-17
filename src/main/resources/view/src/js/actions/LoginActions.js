@@ -37,7 +37,7 @@ function login(login, password) {
 		const response = await auth.login(authenticationRequest);
 		const url = response.url;
 
-		if (url.includes('/crud')) {
+		if (url.includes('/notes')) {
 			window.location.replace('/');
 		} else if (url.includes('?error')) {
 			dispatch({

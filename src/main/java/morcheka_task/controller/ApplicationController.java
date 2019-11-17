@@ -13,11 +13,11 @@ public final class ApplicationController {
     @GetMapping(value = {"/", "/login"})
     public String getLoginForm() {
         return isRequestAuthenticated()
-                ? "redirect:/crud"
+                ? "redirect:/notes"
                 : INDEX_PAGE;
     }
 
-    @GetMapping("/crud")
+    @GetMapping("/notes")
     public String getCrudForm() {
         return isRequestAuthenticated()
             ? INDEX_PAGE

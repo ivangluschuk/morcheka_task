@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/notes")
 public class NoteController {
 
     private static final String USER_NOT_FOUND = "The user is not found";
