@@ -6,6 +6,6 @@
 3. (cd src/main/resources/view ; npm install)
 4. (cd src/main/resources/view ; npm run build)
 5. ./gradlew build
-6. java -jar build/libs/morcheka_task-0.1.0.jar 
+6. java -jar build/libs/morcheka_task.jar 
 
 Приложение доступно по адресу http://localhost:8080/
