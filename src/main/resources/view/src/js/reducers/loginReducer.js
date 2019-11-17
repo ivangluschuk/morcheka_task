@@ -4,28 +4,28 @@ export const CHANGE_FIELD_LOGIN_FORM = 'CHANGE_FIELD_LOGIN_FORM';
 export const HANDLE_LOGIN = 'HANDLE_LOGIN';
 
 const initialState = {
-    login:  {
-        text: '',
-        empty: true,
-    },
-    
-    password: {
-        text: '',
-        empty: true,
-    },
+	login: {
+		text: '',
+		empty: true,
+	},
 
-    infoMassageText: "",
+	password: {
+		text: '',
+		empty: true,
+	},
+
+	infoMassageText: '',
 };
 
 export function loginReducer(state = initialState, action) {
-    switch(action.type) {
-        case CHANGE_FIELD_LOGIN_FORM:
-            return Object.assign({}, state, action.payload);
+	switch (action.type) {
+		case CHANGE_FIELD_LOGIN_FORM:
+			return Object.assign({}, state, action.payload);
 
-        case HANDLE_LOGIN:
-            return Object.assign({}, state, action.payload);
-        
-        default:
-            return state;
-    }
+		case HANDLE_LOGIN:
+			return Object.assign({}, state, action.payload);
+
+		default:
+			return state;
+	}
 }

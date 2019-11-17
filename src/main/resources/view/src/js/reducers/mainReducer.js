@@ -9,10 +9,10 @@ import { tableReducer } from './tableReducer.js';
 import { appReducer } from './appReducer';
 
 export const rootReducer = combineReducers({
-    crud: crudReducer,
-    login: loginReducer,
-    noteAdder: noteAdderReducer,
-    register: registerReducer,
-    table: tableReducer,
-    app: appReducer,
+	crud: crudReducer,
+	login: loginReducer,
+	noteAdder: noteAdderReducer,
+	register: registerReducer,
+	table: tableReducer,
+	app: appReducer,
 });
