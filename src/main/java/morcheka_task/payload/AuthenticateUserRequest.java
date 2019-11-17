@@ -6,7 +6,7 @@ import lombok.NonNull;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public final class RegistrationRequest {
+public final class AuthenticateUserRequest {
 
     @NotBlank
     @NonNull

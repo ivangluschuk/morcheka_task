@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -53,4 +54,8 @@ public final class User implements UserDetails {
             orphanRemoval = true)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Note> notes;
+
+    public void deleteNote(@Nonnull Note note) {
+        this.notes.remove(note);
+    }
 }
